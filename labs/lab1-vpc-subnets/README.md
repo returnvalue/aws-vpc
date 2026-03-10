@@ -1,0 +1,17 @@
+# Lab 1: Foundational VPC & Subnet Isolation
+
+**Goal:** Create a custom VPC and partition it into public and private subnets. Demonstrate subnet sizing where a /24 subnet yields 251 usable IPs.
+
+```bash
+# 1. Create the VPC (10.0.0.0/16)
+VPC_ID=$(awslocal ec2 create-vpc --cidr-block 10.0.0.0/16 --query 'Vpc.VpcId' --output text)
+awslocal ec2 create-tags --resources $VPC_ID --tags Key=Name,Value=ProductionVPC
+
+# 2. Create a Public Subnet (10.0.1.0/24)
+PUB_SUBNET=$(awslocal ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 --query 'Subnet.SubnetId' --output text)
+awslocal ec2 create-tags --resources $PUB_SUBNET --tags Key=Name,Value=PublicSubnet
+
+# 3. Create a Private Subnet (10.0.2.0/24)
+PRIV_SUBNET=$(awslocal ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.2.0/24 --query 'Subnet.SubnetId' --output text)
+awslocal ec2 create-tags --resources $PRIV_SUBNET --tags Key=Name,Value=PrivateSubnet
+```
