@@ -38,3 +38,17 @@ Based on AWS documentation and best practices, these labs walk through the deplo
    ```bash
    docker-compose up -d
    ```
+
+> [!IMPORTANT]
+> **Cumulative Architecture:** These labs are designed as a cumulative, end-to-end scenario rather than isolated tasks. You are building one evolving architecture as you progress.
+>
+> **Session Persistence:** You must run all commands sequentially within the **same terminal session**. The labs rely on bash variables (like `$VPC_ID`, `$PRIV_RT`, etc.) created in earlier steps. If you close your terminal, these variables will be lost and subsequent labs will fail.
+
+## 📚 Labs Index
+1. [Lab 1: Foundational VPC & Subnet Isolation](./labs/lab1-vpc-subnets/README.md)
+2. [Lab 2: Internet & NAT Gateways](./labs/lab2-internet-nat-gateways/README.md)
+3. [Lab 3: Secure AWS Access via VPC Endpoints](./labs/lab3-vpc-endpoints/README.md)
+4. [Lab 4: Defense in Depth (Security Groups vs. NACLs)](./labs/lab4-security-groups-nacls/README.md)
+5. [Lab 5: 1-to-1 Multi-VPC Architecture (VPC Peering)](./labs/lab5-vpc-peering/README.md)
+6. [Lab 6: Hub-and-Spoke Topology (AWS Transit Gateway)](./labs/lab6-transit-gateway/README.md)
+7. [Lab 7: Unidirectional Service Sharing (AWS PrivateLink)](./labs/lab7-privatelink/README.md)
