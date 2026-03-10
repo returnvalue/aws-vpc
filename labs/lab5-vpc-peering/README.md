@@ -13,3 +13,10 @@ awslocal ec2 accept-vpc-peering-connection --vpc-peering-connection-id $PEER_ID
 # 3. Update Route Tables to allow traffic across the peer
 awslocal ec2 create-route --route-table-id $PRIV_RT --destination-cidr-block 10.1.0.0/16 --vpc-peering-connection-id $PEER_ID
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **Private Networking:** VPC Peering connects two VPCs over the internal AWS network, making instances in both VPCs reachable to each other using private IP addresses.
+- **Non-Transitive Nature:** If VPC A is peered with VPC B, and VPC B is peered with VPC C, VPC A **cannot** communicate with VPC C through VPC B. You would need a direct peer between A and C.
+- **CIDR Overlap:** VPCs with overlapping IP address ranges (e.g., both use `10.0.0.0/16`) **cannot** be peered. Planning your IP address space is critical in multi-VPC environments.
+- **Bi-Directional Configuration:** Peering requires both a request and an acceptance, and route tables in **both** VPCs must be updated to route traffic to the peer connection.

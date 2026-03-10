@@ -17,3 +17,10 @@ awslocal ec2 create-vpc-endpoint \
   --vpc-endpoint-type Interface \
   --subnet-ids $(awslocal ec2 create-subnet --vpc-id $ANALYTICS_VPC --cidr-block 10.1.1.0/24 --query 'Subnet.SubnetId' --output text)
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **Service-Level Sharing:** Unlike VPC Peering or TGW, which expose the **entire network**, **AWS PrivateLink** only exposes a specific service (attached to an NLB).
+- **Interface VPC Endpoints:** These place a **Network Interface (ENI)** with a private IP address from your subnet into your VPC, acting as an entry point for the shared service.
+- **Unidirectional Connection:** Traffic flows from the consumer to the provider only. The provider cannot initiate connections back to the consumer.
+- **Overlapping IPs:** PrivateLink works even if both VPCs have identical IP ranges, as it operates at the service level rather than the network level. This makes it ideal for SaaS providers sharing services with many different customers.

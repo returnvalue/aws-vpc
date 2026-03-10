@@ -21,3 +21,9 @@ PRIV_RT=$(awslocal ec2 create-route-table --vpc-id $VPC_ID --query 'RouteTable.R
 awslocal ec2 create-route --route-table-id $PRIV_RT --destination-cidr-block 0.0.0.0/0 --nat-gateway-id $NAT_ID
 awslocal ec2 associate-route-table --subnet-id $PRIV_SUBNET --route-table-id $PRIV_RT
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **Public Subnet Definition:** A subnet is "public" only if its route table points `0.0.0.0/0` (all internet traffic) to an **Internet Gateway (IGW)**.
+- **NAT Gateway Utility:** Instances in private subnets often need internet access for software updates or API calls. A **NAT Gateway** enables this outbound connectivity while keeping the instances unreachable from the public internet.
+- **Cost and Scalability:** NAT Gateways are managed by AWS and scale automatically, but they incur hourly and data-processing charges. In large architectures, routing S3/DynamoDB traffic via Endpoints (Lab 3) is a preferred cost-optimization strategy.

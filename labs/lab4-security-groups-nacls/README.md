@@ -21,3 +21,10 @@ awslocal ec2 replace-network-acl-association \
   --association-id $(awslocal ec2 describe-network-acls --filters Name=vpc-id,Values=$VPC_ID --query 'NetworkAcls[0].Associations[0].NetworkAclAssociationId' --output text) \
   --network-acl-id $NACL_ID
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **Stateful Security Groups (SG):** Act at the **instance level**. If you allow inbound traffic on port 80, the return traffic is automatically allowed—even without an outbound rule. They are your primary line of defense.
+- **Stateless Network ACLs (NACL):** Act at the **subnet boundary**. They evaluate traffic coming into and leaving the subnet. Because they are stateless, you must explicitly allow both inbound and outbound traffic.
+- **Explicit Deny:** Security Groups only support "Allow" rules (everything else is denied by default). NACLs support **Deny rules**, making them ideal for blocking specific malicious IP addresses at the perimeter before they even reach your instances.
+- **Order Matters:** NACL rules are evaluated in numerical order (lowest to highest). Once a match is found, processing stops.

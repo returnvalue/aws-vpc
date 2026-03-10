@@ -15,3 +15,9 @@ awslocal ec2 create-tags --resources $PUB_SUBNET --tags Key=Name,Value=PublicSub
 PRIV_SUBNET=$(awslocal ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.2.0/24 --query 'Subnet.SubnetId' --output text)
 awslocal ec2 create-tags --resources $PRIV_SUBNET --tags Key=Name,Value=PrivateSubnet
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **VPC CIDR Selection:** Choosing a `/16` block provides 65,536 IP addresses, offering enough headroom for future expansion.
+- **Subnet Sizing:** A `/24` subnet provides 256 addresses. However, AWS reserves 5 addresses (Network, VPC Router, DNS, Reserved, Broadcast), leaving you with **251 usable IPs**.
+- **Isolation by Default:** Subnets are isolated within the VPC until route tables are explicitly configured. Creating public and private subnets is the industry standard for securing "three-tier" web architectures.

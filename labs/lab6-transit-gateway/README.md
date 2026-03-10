@@ -22,3 +22,10 @@ awslocal ec2 create-transit-gateway-vpc-attachment \
   --vpc-id $SHARED_VPC \
   --subnet-ids $SHARED_SUBNET
 ```
+
+## 🧠 Key Concepts & Importance
+
+- **Scalability:** Unlike VPC peering, where you need a unique connection for every pair of VPCs (a "full mesh" is `n*(n-1)/2`), a **Transit Gateway (TGW)** acts as a central hub. It scales easily as you add more VPCs.
+- **Transitive Routing:** A TGW allows VPCs to communicate with each other through the hub, solving the non-transitivity issue of peering.
+- **Hybrid Cloud:** TGWs can also aggregate VPN and Direct Connect links, enabling easy communication between on-prem data centers and multiple VPCs.
+- **Hub-and-Spoke:** This model is the standard for large-scale enterprise deployments on AWS.
