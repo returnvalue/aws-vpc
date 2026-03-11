@@ -13,7 +13,6 @@ Based on AWS documentation and best practices, these labs walk through the deplo
 * **Layered Security:** Security Groups are stateful, meaning if inbound is allowed, return traffic is automatically allowed. Network ACLs are stateless, support Deny rules, and evaluate traffic at the subnet level. Network ACLs do not support rate limiting.
 * **Multi-VPC Topologies:** VPC Peering connects two VPCs privately but is not transitive. AWS Transit Gateway acts as a central hub for VPCs and is highly scalable. 
 * **Shared Services:** AWS PrivateLink provides private connectivity to services exposed via VPC Endpoint Services without requiring VPC peering or an Internet Gateway.
-* **Hybrid DNS:** Route 53 Resolver endpoints enable DNS resolution between on-premises networks and AWS VPCs.
 
 ## ⚙️ Prerequisites
 
