@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ProdVpcId: {Type: String}
+  ProdPrivateRouteTableId: {Type: String}
+Resources:
+  AnalyticsVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties: {CidrBlock: 10.1.0.0/16}
+  PeeringConnection:
+    Type: 'AWS::EC2::VPCPeeringConnection'
+    Properties:
+      VpcId: !Ref ProdVpcId
+      PeerVpcId: !Ref AnalyticsVPC
+  ToAnalyticsRoute:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref ProdPrivateRouteTableId
+      DestinationCidrBlock: 10.1.0.0/16
+      VpcPeeringConnectionId: !Ref PeeringConnection

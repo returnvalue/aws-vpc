@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ProdVpcId: {Type: String}
+  ProdPrivateSubnetId: {Type: String}
+Resources:
+  TransitGateway:
+    Type: 'AWS::EC2::TransitGateway'
+    Properties: {Description: Central Hub}
+  SharedVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties: {CidrBlock: 10.2.0.0/16}
+  SharedSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties: {VpcId: !Ref SharedVPC, CidrBlock: 10.2.1.0/24}
+  ProdAttachment:
+    Type: 'AWS::EC2::TransitGatewayAttachment'
+    Properties:
+      TransitGatewayId: !Ref TransitGateway
+      VpcId: !Ref ProdVpcId
+      Subnets: [!Ref ProdPrivateSubnetId]
+  SharedAttachment:
+    Type: 'AWS::EC2::TransitGatewayAttachment'
+    Properties:
+      TransitGatewayId: !Ref TransitGateway
+      VpcId: !Ref SharedVPC
+      Subnets: [!Ref SharedSubnet]

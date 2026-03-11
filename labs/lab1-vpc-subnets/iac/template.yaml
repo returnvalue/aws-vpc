@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  ProductionVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      Tags: [{Key: Name, Value: ProductionVPC}]
+  PublicSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref ProductionVPC
+      CidrBlock: 10.0.1.0/24
+      Tags: [{Key: Name, Value: PublicSubnet}]
+  PrivateSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref ProductionVPC
+      CidrBlock: 10.0.2.0/24
+      Tags: [{Key: Name, Value: PrivateSubnet}]

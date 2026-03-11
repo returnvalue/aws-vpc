@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  VpcId: {Type: String}
+  PrivateRouteTableId: {Type: String}
+Resources:
+  S3Endpoint:
+    Type: 'AWS::EC2::VPCEndpoint'
+    Properties:
+      VpcId: !Ref VpcId
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
+      VpcEndpointType: Gateway
+      RouteTableIds: [!Ref PrivateRouteTableId]

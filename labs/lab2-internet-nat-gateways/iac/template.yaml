@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  VpcId: {Type: String}
+  PublicSubnetId: {Type: String}
+  PrivateSubnetId: {Type: String}
+Resources:
+  IGW:
+    Type: 'AWS::EC2::InternetGateway'
+  VpcIgwAttachment:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties: {VpcId: !Ref VpcId, InternetGatewayId: !Ref IGW}
+  PublicRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties: {VpcId: !Ref VpcId}
+  PublicRoute:
+    Type: 'AWS::EC2::Route'
+    Properties: {RouteTableId: !Ref PublicRouteTable, DestinationCidrBlock: 0.0.0.0/0, GatewayId: !Ref IGW}
+  PublicSubnetAssoc:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties: {SubnetId: !Ref PublicSubnetId, RouteTableId: !Ref PublicRouteTable}
+  NatEip:
+    Type: 'AWS::EC2::EIP'
+    Properties: {Domain: vpc}
+  NatGateway:
+    Type: 'AWS::EC2::NatGateway'
+    Properties: {AllocationId: !GetAtt NatEip.AllocationId, SubnetId: !Ref PublicSubnetId}
+  PrivateRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties: {VpcId: !Ref VpcId}
+  PrivateRoute:
+    Type: 'AWS::EC2::Route'
+    Properties: {RouteTableId: !Ref PrivateRouteTable, DestinationCidrBlock: 0.0.0.0/0, NatGatewayId: !Ref NatGateway}
+  PrivateSubnetAssoc:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties: {SubnetId: !Ref PrivateSubnetId, RouteTableId: !Ref PrivateRouteTable}
