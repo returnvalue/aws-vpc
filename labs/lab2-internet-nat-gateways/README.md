@@ -27,3 +27,18 @@ awslocal ec2 associate-route-table --subnet-id $PRIV_SUBNET --route-table-id $PR
 - **Public Subnet Definition:** A subnet is "public" only if its route table points `0.0.0.0/0` (all internet traffic) to an **Internet Gateway (IGW)**.
 - **NAT Gateway Utility:** Instances in private subnets often need internet access for software updates or API calls. A **NAT Gateway** enables this outbound connectivity while keeping the instances unreachable from the public internet.
 - **Cost and Scalability:** NAT Gateways are managed by AWS and scale automatically, but they incur hourly and data-processing charges. In large architectures, routing S3/DynamoDB traffic via Endpoints (Lab 3) is a preferred cost-optimization strategy.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-internet-gateway`: Creates an Internet Gateway.
+- `awslocal ec2 attach-internet-gateway`: Attaches an IGW to a VPC.
+- `awslocal ec2 create-route-table`: Creates a route table.
+- `awslocal ec2 create-route`: Adds a route to a route table.
+    - `--gateway-id`: The ID of an Internet Gateway.
+    - `--nat-gateway-id`: The ID of a NAT Gateway.
+- `awslocal ec2 associate-route-table`: Associates a route table with a subnet.
+- `awslocal ec2 allocate-address`: Allocates an Elastic IP address, required for a NAT Gateway.
+    - `--domain vpc`: Indicates the address is for use in a VPC.
+- `awslocal ec2 create-nat-gateway`: Creates a NAT Gateway.
+    - `--subnet-id`: The public subnet in which to place the NAT Gateway.
+    - `--allocation-id`: The allocation ID of the Elastic IP.

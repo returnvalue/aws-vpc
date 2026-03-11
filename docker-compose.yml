@@ -6,3 +6,5 @@ services:
     environment:
       - ACTIVATE_PRO=1
       - LOCALSTACK_AUTH_TOKEN=${YOUR_TOKEN}  # Use the token from your .env file
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"

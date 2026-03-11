@@ -17,3 +17,11 @@ awslocal ec2 create-vpc-endpoint \
 - **Improved Security:** Traffic never traverses the public internet or your NAT Gateway, reducing exposure and potential security risks.
 - **Cost Reduction:** Gateway Endpoints are free. By routing S3 traffic through an endpoint, you avoid the **$0.045/GB data processing fee** typically charged by NAT Gateways.
 - **Service Specificity:** Endpoints target specific services. Unlike a NAT Gateway which is a general exit point, an endpoint only provides a path to the AWS service named in its configuration.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-vpc-endpoint`: Creates a VPC endpoint.
+    - `--vpc-id`: The ID of the VPC.
+    - `--service-name`: The service name (e.g., `com.amazonaws.us-east-1.s3`).
+    - `--vpc-endpoint-type`: The type of endpoint (e.g., `Gateway`).
+    - `--route-table-ids`: The route table(s) to associate with the Gateway endpoint.

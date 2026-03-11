@@ -24,3 +24,21 @@ awslocal ec2 create-vpc-endpoint \
 - **Interface VPC Endpoints:** These place a **Network Interface (ENI)** with a private IP address from your subnet into your VPC, acting as an entry point for the shared service.
 - **Unidirectional Connection:** Traffic flows from the consumer to the provider only. The provider cannot initiate connections back to the consumer.
 - **Overlapping IPs:** PrivateLink works even if both VPCs have identical IP ranges, as it operates at the service level rather than the network level. This makes it ideal for SaaS providers sharing services with many different customers.
+
+## 🛠️ Command Reference
+
+- `awslocal elbv2 create-load-balancer`: Creates a Network Load Balancer (NLB).
+    - `--name`: The name of the load balancer.
+    - `--type`: The type of load balancer (e.g., `network`).
+    - `--subnets`: The subnets to associate with the load balancer.
+- `awslocal ec2 create-vpc-endpoint-service-configuration`: Creates a VPC endpoint service configuration (the Provider).
+    - `--network-load-balancer-arns`: The ARN of the NLB to associate with the service.
+    - `--acceptance-required`: Indicates whether requests from consumers to create an endpoint to the service must be accepted.
+- `awslocal ec2 describe-vpc-endpoint-service-configurations`: Describes the VPC endpoint service configurations.
+    - `--service-ids`: The ID(s) of the service configurations to describe.
+- `awslocal ec2 create-vpc-endpoint`: Creates a VPC endpoint (the Consumer).
+    - `--vpc-id`: The VPC in which to create the endpoint.
+    - `--service-name`: The name of the service for the endpoint.
+    - `--vpc-endpoint-type`: The type of endpoint (e.g., `Interface`).
+    - `--subnet-ids`: The subnets in which to create the endpoint network interfaces.
+- `awslocal ec2 create-subnet`: Creates a subnet within a VPC.

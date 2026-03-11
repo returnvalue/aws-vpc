@@ -21,3 +21,14 @@ awslocal ec2 create-tags --resources $PRIV_SUBNET --tags Key=Name,Value=PrivateS
 - **VPC CIDR Selection:** Choosing a `/16` block provides 65,536 IP addresses, offering enough headroom for future expansion.
 - **Subnet Sizing:** A `/24` subnet provides 256 addresses. However, AWS reserves 5 addresses (Network, VPC Router, DNS, Reserved, Broadcast), leaving you with **251 usable IPs**.
 - **Isolation by Default:** Subnets are isolated within the VPC until route tables are explicitly configured. Creating public and private subnets is the industry standard for securing "three-tier" web architectures.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud.
+    - `--cidr-block`: The IP range for the VPC.
+- `awslocal ec2 create-tags`: Adds tags to a resource.
+    - `--resources`: The ID(s) of the resource(s) to tag.
+    - `--tags`: The key-value pairs for the tags.
+- `awslocal ec2 create-subnet`: Creates a subnet within a VPC.
+    - `--vpc-id`: The VPC ID.
+    - `--cidr-block`: The IP range for the subnet.

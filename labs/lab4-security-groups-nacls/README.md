@@ -28,3 +28,20 @@ awslocal ec2 replace-network-acl-association \
 - **Stateless Network ACLs (NACL):** Act at the **subnet boundary**. They evaluate traffic coming into and leaving the subnet. Because they are stateless, you must explicitly allow both inbound and outbound traffic.
 - **Explicit Deny:** Security Groups only support "Allow" rules (everything else is denied by default). NACLs support **Deny rules**, making them ideal for blocking specific malicious IP addresses at the perimeter before they even reach your instances.
 - **Order Matters:** NACL rules are evaluated in numerical order (lowest to highest). Once a match is found, processing stops.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-security-group`: Creates a security group.
+- `awslocal ec2 authorize-security-group-ingress`: Adds an inbound rule to a security group.
+- `awslocal ec2 create-network-acl`: Creates a network ACL.
+- `awslocal ec2 create-network-acl-entry`: Creates an entry (rule) in a network ACL.
+    - `--network-acl-id`: The ID of the NACL.
+    - `--ingress`: Indicates the rule is for inbound traffic.
+    - `--rule-number`: The rule number (order of evaluation).
+    - `--protocol`: The protocol for the rule (e.g., `-1` for all).
+    - `--cidr-block`: The IP range for the rule.
+    - `--rule-action`: The action for the rule (`allow` or `deny`).
+- `awslocal ec2 replace-network-acl-association`: Replaces the NACL associated with a subnet.
+    - `--association-id`: The ID of the current association.
+    - `--network-acl-id`: The ID of the new NACL to associate.
+- `awslocal ec2 describe-network-acls`: Describes network ACLs, used here to find an association ID.

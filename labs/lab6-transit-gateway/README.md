@@ -29,3 +29,14 @@ awslocal ec2 create-transit-gateway-vpc-attachment \
 - **Transitive Routing:** A TGW allows VPCs to communicate with each other through the hub, solving the non-transitivity issue of peering.
 - **Hybrid Cloud:** TGWs can also aggregate VPN and Direct Connect links, enabling easy communication between on-prem data centers and multiple VPCs.
 - **Hub-and-Spoke:** This model is the standard for large-scale enterprise deployments on AWS.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-transit-gateway`: Creates a Transit Gateway.
+    - `--description`: A description of the Transit Gateway.
+- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
+- `awslocal ec2 create-subnet`: Creates a subnet within a VPC.
+- `awslocal ec2 create-transit-gateway-vpc-attachment`: Attaches a VPC to a Transit Gateway.
+    - `--transit-gateway-id`: The ID of the Transit Gateway.
+    - `--vpc-id`: The ID of the VPC to attach.
+    - `--subnet-ids`: The IDs of the subnets to use for the attachment.

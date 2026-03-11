@@ -20,3 +20,16 @@ awslocal ec2 create-route --route-table-id $PRIV_RT --destination-cidr-block 10.
 - **Non-Transitive Nature:** If VPC A is peered with VPC B, and VPC B is peered with VPC C, VPC A **cannot** communicate with VPC C through VPC B. You would need a direct peer between A and C.
 - **CIDR Overlap:** VPCs with overlapping IP address ranges (e.g., both use `10.0.0.0/16`) **cannot** be peered. Planning your IP address space is critical in multi-VPC environments.
 - **Bi-Directional Configuration:** Peering requires both a request and an acceptance, and route tables in **both** VPCs must be updated to route traffic to the peer connection.
+
+## 🛠️ Command Reference
+
+- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
+- `awslocal ec2 create-vpc-peering-connection`: Requests a VPC peering connection between two VPCs.
+    - `--vpc-id`: The ID of the requester VPC.
+    - `--peer-vpc-id`: The ID of the accepter VPC.
+- `awslocal ec2 accept-vpc-peering-connection`: Accepts a VPC peering connection request.
+    - `--vpc-peering-connection-id`: The ID of the peering connection.
+- `awslocal ec2 create-route`: Adds a route to a route table.
+    - `--route-table-id`: The ID of the route table.
+    - `--destination-cidr-block`: The destination traffic range.
+    - `--vpc-peering-connection-id`: The ID of the peering connection to route traffic through.
