@@ -20,7 +20,7 @@ awslocal ec2 create-vpc-endpoint \
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-vpc-endpoint`: Creates a VPC endpoint.
+- `ec2 create-vpc-endpoint`: Creates a VPC endpoint.
     - `--vpc-id`: The ID of the VPC.
     - `--service-name`: The service name (e.g., `com.amazonaws.us-east-1.s3`).
     - `--vpc-endpoint-type`: The type of endpoint (e.g., `Gateway`).

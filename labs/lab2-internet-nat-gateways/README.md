@@ -30,15 +30,15 @@ awslocal ec2 associate-route-table --subnet-id $PRIV_SUBNET --route-table-id $PR
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-internet-gateway`: Creates an Internet Gateway.
-- `awslocal ec2 attach-internet-gateway`: Attaches an IGW to a VPC.
-- `awslocal ec2 create-route-table`: Creates a route table.
-- `awslocal ec2 create-route`: Adds a route to a route table.
+- `ec2 create-internet-gateway`: Creates an Internet Gateway.
+- `ec2 attach-internet-gateway`: Attaches an IGW to a VPC.
+- `ec2 create-route-table`: Creates a route table.
+- `ec2 create-route`: Adds a route to a route table.
     - `--gateway-id`: The ID of an Internet Gateway.
     - `--nat-gateway-id`: The ID of a NAT Gateway.
-- `awslocal ec2 associate-route-table`: Associates a route table with a subnet.
-- `awslocal ec2 allocate-address`: Allocates an Elastic IP address, required for a NAT Gateway.
+- `ec2 associate-route-table`: Associates a route table with a subnet.
+- `ec2 allocate-address`: Allocates an Elastic IP address, required for a NAT Gateway.
     - `--domain vpc`: Indicates the address is for use in a VPC.
-- `awslocal ec2 create-nat-gateway`: Creates a NAT Gateway.
+- `ec2 create-nat-gateway`: Creates a NAT Gateway.
     - `--subnet-id`: The public subnet in which to place the NAT Gateway.
     - `--allocation-id`: The allocation ID of the Elastic IP.

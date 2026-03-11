@@ -31,17 +31,17 @@ awslocal ec2 replace-network-acl-association \
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-security-group`: Creates a security group.
-- `awslocal ec2 authorize-security-group-ingress`: Adds an inbound rule to a security group.
-- `awslocal ec2 create-network-acl`: Creates a network ACL.
-- `awslocal ec2 create-network-acl-entry`: Creates an entry (rule) in a network ACL.
+- `ec2 create-security-group`: Creates a security group.
+- `ec2 authorize-security-group-ingress`: Adds an inbound rule to a security group.
+- `ec2 create-network-acl`: Creates a network ACL.
+- `ec2 create-network-acl-entry`: Creates an entry (rule) in a network ACL.
     - `--network-acl-id`: The ID of the NACL.
     - `--ingress`: Indicates the rule is for inbound traffic.
     - `--rule-number`: The rule number (order of evaluation).
     - `--protocol`: The protocol for the rule (e.g., `-1` for all).
     - `--cidr-block`: The IP range for the rule.
     - `--rule-action`: The action for the rule (`allow` or `deny`).
-- `awslocal ec2 replace-network-acl-association`: Replaces the NACL associated with a subnet.
+- `ec2 replace-network-acl-association`: Replaces the NACL associated with a subnet.
     - `--association-id`: The ID of the current association.
     - `--network-acl-id`: The ID of the new NACL to associate.
-- `awslocal ec2 describe-network-acls`: Describes network ACLs, used here to find an association ID.
+- `ec2 describe-network-acls`: Describes network ACLs, used here to find an association ID.

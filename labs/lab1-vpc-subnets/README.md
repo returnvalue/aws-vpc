@@ -24,11 +24,11 @@ awslocal ec2 create-tags --resources $PRIV_SUBNET --tags Key=Name,Value=PrivateS
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud.
+- `ec2 create-vpc`: Creates a Virtual Private Cloud.
     - `--cidr-block`: The IP range for the VPC.
-- `awslocal ec2 create-tags`: Adds tags to a resource.
+- `ec2 create-tags`: Adds tags to a resource.
     - `--resources`: The ID(s) of the resource(s) to tag.
     - `--tags`: The key-value pairs for the tags.
-- `awslocal ec2 create-subnet`: Creates a subnet within a VPC.
+- `ec2 create-subnet`: Creates a subnet within a VPC.
     - `--vpc-id`: The VPC ID.
     - `--cidr-block`: The IP range for the subnet.

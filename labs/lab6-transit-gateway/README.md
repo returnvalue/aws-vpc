@@ -32,11 +32,11 @@ awslocal ec2 create-transit-gateway-vpc-attachment \
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-transit-gateway`: Creates a Transit Gateway.
+- `ec2 create-transit-gateway`: Creates a Transit Gateway.
     - `--description`: A description of the Transit Gateway.
-- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
-- `awslocal ec2 create-subnet`: Creates a subnet within a VPC.
-- `awslocal ec2 create-transit-gateway-vpc-attachment`: Attaches a VPC to a Transit Gateway.
+- `ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
+- `ec2 create-subnet`: Creates a subnet within a VPC.
+- `ec2 create-transit-gateway-vpc-attachment`: Attaches a VPC to a Transit Gateway.
     - `--transit-gateway-id`: The ID of the Transit Gateway.
     - `--vpc-id`: The ID of the VPC to attach.
     - `--subnet-ids`: The IDs of the subnets to use for the attachment.

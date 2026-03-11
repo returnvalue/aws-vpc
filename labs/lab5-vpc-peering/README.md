@@ -23,13 +23,13 @@ awslocal ec2 create-route --route-table-id $PRIV_RT --destination-cidr-block 10.
 
 ## 🛠️ Command Reference
 
-- `awslocal ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
-- `awslocal ec2 create-vpc-peering-connection`: Requests a VPC peering connection between two VPCs.
+- `ec2 create-vpc`: Creates a Virtual Private Cloud (VPC).
+- `ec2 create-vpc-peering-connection`: Requests a VPC peering connection between two VPCs.
     - `--vpc-id`: The ID of the requester VPC.
     - `--peer-vpc-id`: The ID of the accepter VPC.
-- `awslocal ec2 accept-vpc-peering-connection`: Accepts a VPC peering connection request.
+- `ec2 accept-vpc-peering-connection`: Accepts a VPC peering connection request.
     - `--vpc-peering-connection-id`: The ID of the peering connection.
-- `awslocal ec2 create-route`: Adds a route to a route table.
+- `ec2 create-route`: Adds a route to a route table.
     - `--route-table-id`: The ID of the route table.
     - `--destination-cidr-block`: The destination traffic range.
     - `--vpc-peering-connection-id`: The ID of the peering connection to route traffic through.
