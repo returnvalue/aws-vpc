@@ -5,10 +5,13 @@
 ```bash
 # 1. Create a Network Load Balancer (NLB) in the Provider VPC
 NLB_ARN=$(awslocal elbv2 create-load-balancer --name PrivateLinkNLB --type network --subnets $PRIV_SUBNET --query 'LoadBalancers[0].LoadBalancerArn' --output text)
+NLB_ARN=$(aws elbv2 create-load-balancer --name PrivateLinkNLB --type network --subnets $PRIV_SUBNET --query 'LoadBalancers[0].LoadBalancerArn' --output text)
 
 # 2. Create a VPC Endpoint Service (The Provider)
 SERVICE_ID=$(awslocal ec2 create-vpc-endpoint-service-configuration --network-load-balancer-arns $NLB_ARN --acceptance-required --query 'ServiceConfiguration.ServiceId' --output text)
+SERVICE_ID=$(aws ec2 create-vpc-endpoint-service-configuration --network-load-balancer-arns $NLB_ARN --acceptance-required --query 'ServiceConfiguration.ServiceId' --output text)
 SERVICE_NAME=$(awslocal ec2 describe-vpc-endpoint-service-configurations --service-ids $SERVICE_ID --query 'ServiceConfigurations[0].ServiceName' --output text)
+SERVICE_NAME=$(aws ec2 describe-vpc-endpoint-service-configurations --service-ids $SERVICE_ID --query 'ServiceConfigurations[0].ServiceName' --output text)
 
 # 3. Create an Interface Endpoint (The Consumer) in the Analytics VPC
 awslocal ec2 create-vpc-endpoint \
@@ -16,6 +19,11 @@ awslocal ec2 create-vpc-endpoint \
   --service-name $SERVICE_NAME \
   --vpc-endpoint-type Interface \
   --subnet-ids $(awslocal ec2 create-subnet --vpc-id $ANALYTICS_VPC --cidr-block 10.1.1.0/24 --query 'Subnet.SubnetId' --output text)
+aws ec2 create-vpc-endpoint \
+  --vpc-id $ANALYTICS_VPC \
+  --service-name $SERVICE_NAME \
+  --vpc-endpoint-type Interface \
+  --subnet-ids $(aws ec2 create-subnet --vpc-id $ANALYTICS_VPC --cidr-block 10.1.1.0/24 --query 'Subnet.SubnetId' --output text)
 ```
 
 ## 🧠 Key Concepts & Importance
@@ -42,3 +50,45 @@ awslocal ec2 create-vpc-endpoint \
     - `--vpc-endpoint-type`: The type of endpoint (e.g., `Interface`).
     - `--subnet-ids`: The subnets in which to create the endpoint network interfaces.
 - `ec2 create-subnet`: Creates a subnet within a VPC.
+
+---
+
+💡 **Pro Tip: Using `aws` instead of `awslocal`**
+
+If you prefer using the standard `aws` CLI without the `awslocal` wrapper or repeating the `--endpoint-url` flag, you can configure a dedicated profile in your AWS config files.
+
+### 1. Configure your Profile
+Add the following to your `~/.aws/config` file:
+```ini
+[profile localstack]
+region = us-east-1
+output = json
+# This line redirects all commands for this profile to LocalStack
+endpoint_url = http://localhost:4566
+```
+
+Add matching dummy credentials to your `~/.aws/credentials` file:
+```ini
+[localstack]
+aws_access_key_id = test
+aws_secret_access_key = test
+```
+
+### 2. Use it in your Terminal
+You can now run commands in two ways:
+
+**Option A: Pass the profile flag**
+```bash
+aws iam create-user --user-name DevUser --profile localstack
+```
+
+**Option B: Set an environment variable (Recommended)**
+Set your profile once in your session, and all subsequent `aws` commands will automatically target LocalStack:
+```bash
+export AWS_PROFILE=localstack
+aws iam create-user --user-name DevUser
+```
+
+### Why this works
+- **Precedence**: The AWS CLI (v2) supports a global `endpoint_url` setting within a profile. When this is set, the CLI automatically redirects all API calls for that profile to your local container instead of the real AWS cloud.
+- **Convenience**: This allows you to use the standard documentation commands exactly as written, which is helpful if you are copy-pasting examples from AWS labs or tutorials.
