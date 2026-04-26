@@ -1,7 +1,6 @@
 # Lab 5: 1-to-1 Multi-VPC Architecture (VPC Peering)
 
 **Goal:** Create an "Analytics" VPC and establish a private, non-transitive VPC peering connection.
-
 ```bash
 # 1. Create Analytics VPC
 ANALYTICS_VPC=$(awslocal ec2 create-vpc --cidr-block 10.1.0.0/16 --query 'Vpc.VpcId' --output text)

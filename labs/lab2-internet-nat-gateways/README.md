@@ -1,7 +1,6 @@
 # Lab 2: Internet & NAT Gateways
 
 **Goal:** Route 0.0.0.0/0 to an Internet Gateway for the public subnet. Place a NAT Gateway in the public subnet to enable outbound internet access for the private subnet.
-
 ```bash
 # 1. Create and attach an Internet Gateway
 IGW_ID=$(awslocal ec2 create-internet-gateway --query 'InternetGateway.InternetGatewayId' --output text)

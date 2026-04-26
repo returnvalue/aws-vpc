@@ -1,7 +1,6 @@
 # Lab 4: Defense in Depth (Security Groups vs. NACLs)
 
 **Goal:** Implement stateful Security Groups that automatically allow return traffic, and stateless Network ACLs with explicit Deny rules.
-
 ```bash
 # 1. Security Group (Stateful - allow HTTP inbound)
 SG_ID=$(awslocal ec2 create-security-group --group-name WebServerSG --description "Allow HTTP" --vpc-id $VPC_ID --query 'GroupId' --output text)

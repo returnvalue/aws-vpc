@@ -1,7 +1,6 @@
 # Lab 7: Unidirectional Service Sharing (AWS PrivateLink)
 
 **Goal:** Share a service using an Interface VPC Endpoint without exposing the networks to each other via peering.
-
 ```bash
 # 1. Create a Network Load Balancer (NLB) in the Provider VPC
 NLB_ARN=$(awslocal elbv2 create-load-balancer --name PrivateLinkNLB --type network --subnets $PRIV_SUBNET --query 'LoadBalancers[0].LoadBalancerArn' --output text)

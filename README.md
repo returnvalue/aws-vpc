@@ -26,20 +26,17 @@ Based on AWS documentation and best practices, these labs walk through the deplo
    ```bash
    git clone https://github.com/awslabs/vpc.git
    cd vpc
-   
-```
+   ```
 
 2. Configure your LocalStack Auth Token:
    ```bash
    echo "YOUR_TOKEN=your_auth_token_here" > .env
-   
-```
+   ```
 
 3. Start LocalStack Pro:
    ```bash
    docker-compose up -d
-   
-```
+   ```
 
 > [!IMPORTANT]
 > **Cumulative Architecture:** These labs are designed as a cumulative, end-to-end scenario rather than isolated tasks. You are building one evolving architecture as you progress.

@@ -1,7 +1,6 @@
 # Lab 6: Hub-and-Spoke Topology (AWS Transit Gateway)
 
 **Goal:** Set up a centralized Transit Gateway to route traffic between multiple VPCs, solving the scalability issues of non-transitive VPC peering.
-
 ```bash
 # 1. Create the Transit Gateway
 TGW_ID=$(awslocal ec2 create-transit-gateway --description "Central Hub" --query 'TransitGateway.TransitGatewayId' --output text)
